@@ -16,6 +16,8 @@ class ChicagoPizzaStore(AbsPizzaStore):
             return ChicagoStyleClamPizza()
         elif pizza_type == 'veggie':
             return ChicagoStyleVeggiePizza()
+        else:
+            return None
 
 
 class NYPizzaStore(AbsPizzaStore):
@@ -29,6 +31,8 @@ class NYPizzaStore(AbsPizzaStore):
             return NYStyleClamPizza()
         elif pizza_type == 'veggie':
             return NYStyleVeggiePizza()
+        else:
+            return None
 
 
 class CaliforniaPizzaStore(AbsPizzaStore):
@@ -42,6 +46,8 @@ class CaliforniaPizzaStore(AbsPizzaStore):
             return CaliforniaStyleClamPizza()
         elif pizza_type == 'veggie':
             return CaliforniaStyleVeggiePizza()
+        else:
+            return None
 
 
 if __name__ == '__main__':

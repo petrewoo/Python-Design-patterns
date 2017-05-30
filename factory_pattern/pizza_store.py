@@ -7,6 +7,15 @@ from .pizza import *
 class AbsPizzaStore(object):
 
     def order_pizza(self, pizza_type):
+        raise NotImplementedError
+
+    def _create(self):
+        raise NotImplementedError
+
+
+class PizzaStore(AbsPizzaStore):
+
+    def order_pizza(self, pizza_type):
         pizza = self._create(pizza_type)
         pizza.prepare()
         pizza.bake()
@@ -17,7 +26,7 @@ class AbsPizzaStore(object):
         raise NotImplementedError
 
 
-class SimplePizzaStore(AbsPizzaStore):
+class SimplePizzaStore(PizzaStore):
 
     def _create(self, pizza_type):
         if pizza_type == 'cheese':
@@ -28,6 +37,8 @@ class SimplePizzaStore(AbsPizzaStore):
             return ClamPizza()
         elif pizza_type == 'veggie':
             return VeggiePizza()
+        else:
+            return None
 
 
 if __name__ == '__main__':

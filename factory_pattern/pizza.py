@@ -23,16 +23,18 @@ class Pizza(AbsPizza):
         print('new a raw {}'.format(self.__class__.__name__))
 
     def prepare(self):
-        print("Prepare {}".format(self.__class__.__name__))
+        print('Prepare {}'.format(self.__class__.__name__))
 
     def bake(self):
-        print("Bake {}".format(self.__class__.__name__))
+        print('Bake {} for 25 minutes at 350'.format(self.__class__.__name__))
 
     def cut(self):
-        print("Cut {}".format(self.__class__.__name__))
+        print('Cut the {} into diagonal slices'.format(
+            self.__class__.__name__))
 
     def box(self):
-        print("Box {}".format(self.__class__.__name__))
+        print('Place {} in offical PizzaStore box'.format(
+            self.__class__.__name__))
 
 
 class CheesePizza(Pizza):
