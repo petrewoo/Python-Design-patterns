@@ -19,11 +19,18 @@ class AbsPizza(object):
 
 class Pizza(AbsPizza):
 
-    def __init__(self):
+    def __init__(self, ingredient):
+        self._ingredient = ingredient
         print('new a raw {}'.format(self.__class__.__name__))
 
     def prepare(self):
         print('Prepare {}'.format(self.__class__.__name__))
+        self._ingredient.create_dough()
+        self._ingredient.create_sauce()
+        self._ingredient.create_cheese()
+        self._ingredient.create_veggie()
+        self._ingredient.create_peppernoi()
+        self._ingredient.create_clam()
 
     def bake(self):
         print('Bake {} for 25 minutes at 350'.format(self.__class__.__name__))

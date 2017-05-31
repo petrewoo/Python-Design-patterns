@@ -2,52 +2,64 @@
 # -*- encoding: utf-8 -*-
 
 from .pizza import *
-from .pizzz_store import *
+from .pizza_store import *
+from .ingredient_factory import (ChicagoPizzaIngredientFactory,
+                                 NYPizzaIngredientFactory,
+                                 CaliforniaPizzaIngredientFactory)
 
 
-class ChicagoPizzaStore(AbsPizzaStore):
-
-    def _create(self, pizza_type):
-        if pizza_type == 'cheese':
-            return ChicagoStyleCheesePizza()
-        elif pizza_type == 'pepperoni':
-            return ChicagoStylePepperoniPizza()
-        elif pizza_type == 'clam':
-            return ChicagoStyleClamPizza()
-        elif pizza_type == 'veggie':
-            return ChicagoStyleVeggiePizza()
-        else:
-            return None
-
-
-class NYPizzaStore(AbsPizzaStore):
+class ChicagoPizzaStore(PizzaStore):
 
     def _create(self, pizza_type):
         if pizza_type == 'cheese':
-            return NYStyleCheesePizza()
+            return ChicagoStyleCheesePizza(self.ingredient)
         elif pizza_type == 'pepperoni':
-            return NYStylePepperoniPizza()
+            return ChicagoStylePepperoniPizza(self.ingredient)
         elif pizza_type == 'clam':
-            return NYStyleClamPizza()
+            return ChicagoStyleClamPizza(self.ingredient)
         elif pizza_type == 'veggie':
-            return NYStyleVeggiePizza()
+            return ChicagoStyleVeggiePizza(self.ingredient)
         else:
-            return None
+            return Pizza(self._ingredient)
+
+    def _ingredient(self):
+        self.ingredient = ChicagoPizzaIngredientFactory()
 
 
-class CaliforniaPizzaStore(AbsPizzaStore):
+class NYPizzaStore(PizzaStore):
 
     def _create(self, pizza_type):
         if pizza_type == 'cheese':
-            return CaliforniaStyleCheesePizza()
+            return NYStyleCheesePizza(self.ingredient)
         elif pizza_type == 'pepperoni':
-            return CaliforniaStylePepperoniPizza()
+            return NYStylePepperoniPizza(self.ingredient)
         elif pizza_type == 'clam':
-            return CaliforniaStyleClamPizza()
+            return NYStyleClamPizza(self.ingredient)
         elif pizza_type == 'veggie':
-            return CaliforniaStyleVeggiePizza()
+            return NYStyleVeggiePizza(self.ingredient)
         else:
-            return None
+            return Pizza(self.ingredient)
+
+    def _ingredient(self):
+        self.ingredient = NYPizzaIngredientFactory()
+
+
+class CaliforniaPizzaStore(PizzaStore):
+
+    def _create(self, pizza_type):
+        if pizza_type == 'cheese':
+            return CaliforniaStyleCheesePizza(self.ingredient)
+        elif pizza_type == 'pepperoni':
+            return CaliforniaStylePepperoniPizza(self.ingredient)
+        elif pizza_type == 'clam':
+            return CaliforniaStyleClamPizza(self.ingredient)
+        elif pizza_type == 'veggie':
+            return CaliforniaStyleVeggiePizza(self.ingredient)
+        else:
+            return Pizza(self.ingredient)
+
+    def _ingredient(self):
+        self.ingredient = CaliforniaPizzaIngredientFactory()
 
 
 if __name__ == '__main__':

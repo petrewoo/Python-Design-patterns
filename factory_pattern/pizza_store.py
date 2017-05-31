@@ -2,20 +2,25 @@
 # -*- encoding: utf-8 -*-
 
 from .pizza import *
+from .ingredient_factory import IngredientFactory
 
 
 class AbsPizzaStore(object):
 
-    def order_pizza(self, pizza_type):
+    def order_pizza(self):
         raise NotImplementedError
 
     def _create(self):
+        raise NotImplementedError
+
+    def _ingredient(self):
         raise NotImplementedError
 
 
 class PizzaStore(AbsPizzaStore):
 
     def order_pizza(self, pizza_type):
+        self._ingredient()
         pizza = self._create(pizza_type)
         pizza.prepare()
         pizza.bake()
@@ -25,20 +30,26 @@ class PizzaStore(AbsPizzaStore):
     def _create(self, pizza_type):
         raise NotImplementedError
 
+    def _ingredient(self):
+        raise NotImplementedError
+
 
 class SimplePizzaStore(PizzaStore):
 
     def _create(self, pizza_type):
         if pizza_type == 'cheese':
-            return CheesePizza()
+            return CheesePizza(self.ingredient)
         elif pizza_type == 'pepperoni':
-            return PepperoniPizza()
+            return PepperoniPizza(self.ingredient)
         elif pizza_type == 'clam':
-            return ClamPizza()
+            return ClamPizza(self.ingredient)
         elif pizza_type == 'veggie':
-            return VeggiePizza()
+            return VeggiePizza(self.ingredient)
         else:
-            return None
+            return Pizza(self._ingredient)
+
+    def _ingredient(self):
+        self.ingredient = IngredientFactory()
 
 
 if __name__ == '__main__':
