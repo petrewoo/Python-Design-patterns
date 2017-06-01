@@ -1,6 +1,16 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
+"""
+Abstract Factory patterns.
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is a Abstract Factory Sample.
+
+AbsIngredientFactory define a big interface to create six ingredients.
+Use factory method implement ingredient create method.
+"""
+
 
 class AbsIngredientFactory(object):
 
